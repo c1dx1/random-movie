@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рандомный фильм по вашим параметрам</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/sources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/sources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/sources/favicon-16x16.png">
+    <link rel="manifest" href="/sources/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Подберем фильм, сериал или что-то другое по вашему запросу!</h1>
+        <form action="postform" method="POST">
+            <label for="genre">Жанр:</label>
+            <select id="genre" name="genre">
+                <option value="" selected>Любой</option>
+                <option value="&genres.name=%D0%B4%D1%80%D0%B0%D0%BC%D0%B0">Драма</option>
+                <option value="&genres.name=%D0%BA%D0%BE%D0%BC%D0%B5%D0%B4%D0%B8%D1%8F">Комедия</option>
+                <option value="&genres.name=%D1%82%D1%80%D0%B8%D0%BB%D0%BB%D0%B5%D1%80">Триллер</option>
+                <option value="&genres.name=%D1%83%D0%B6%D0%B0%D1%81%D1%8B">Ужасы</option>
+                <option value="&genres.name=%D0%BC%D0%B5%D0%BB%D0%BE%D0%B4%D1%80%D0%B0%D0%BC%D0%B0">Мелодрама</option>
+            </select>
+            <br>
+            <label for="typeM">Тип:</label>
+            <select id="typeM" name="typeM">
+                <option value="" selected>Любой</option>
+                <option value="&typeNumber=1">Фильм</option>
+                <option value="&typeNumber=2">ТВ-сериал</option>
+                <option value="&typeNumber=4">Аниме</option>
+                <option value="&typeNumber=5">Мультсериал</option>
+                <option value="&typeNumber=3">Мультфильм</option>
+            </select>
+            <br>
+            <label for="country">Страна:</label>
+            <select id="country" name="country">
+                <option value="" selected>Любая</option>
+                <option value="&countries.name=!%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F">Зарубежные</option>
+                <option value="&countries.name=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F">Отечественные</option>
+            </select>
+            <br>
+            <label for="year">Год релиза:</label>
+            <input type="number" id="year" name="year" value="1874" required min="1874" max="2024">
+            <br>
+            <label for="KP">Рейтинг КиноПоиск:</label>
+            <input type="number" id="KP" name="KP" step="0.1" value="0" required min="0" max="9">
+            <br>
+            <button type="submit" class="submit-btn">Найти</button>
+        </form>
+    </div>
+</body>
+</html>

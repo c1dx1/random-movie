@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Name}}</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/sources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/sources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/sources/favicon-16x16.png">
+    <link rel="manifest" href="/sources/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="static/css/movie.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>{{.Name}}</h1>
+        <div class="movie-info">
+            <img src={{.Poster.URL}} alt="{{.Name}}" class="poster"/>
+            <div class="details">
+                <p><strong>Тип:</strong> {{.Type}}</p>
+                <p><strong>Год выпуска:</strong> {{.Year}}</p>
+                <p><strong>Рейтинг КП:</strong> {{.Rating.KP}}</p>
+                <p><strong>Жанры:</strong>
+                    {{range $index, $genre := .Genres}}
+                        {{if $index}}, {{end}}{{.Genre}}
+                    {{end}}
+                </p>
+                <p><strong>Страна:</strong> {{(index .Countries 0).Country}}</p>
+                <p><strong>Описание:</strong> {{.Description}}</p>
+            </div>
+        </div>
+        <div class="button-container">
+            <button onClick="window.location.reload();" class="submit-btn">Найти еще раз</button>
+            <form action="{{.URL}}" target="_blank">
+                <button class="submit-btn">Перейти на страницу КиноПоиска</button>
+            </form>
+            <form action="/">
+                <button class="index-btn">На главную</button>
+            </form>
+        </div>
+        </div>
+</body>
+</html>
