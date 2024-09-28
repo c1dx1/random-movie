@@ -3,18 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Рандомный фильм по вашим параметрам</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/sources/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/sources/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/sources/favicon-16x16.png">
-    <link rel="manifest" href="/sources/site.webmanifest">
-    <link rel="stylesheet" type="text/css" href="static/css/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #2d3436;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0984e3;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+        }
+
+        /* Header styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2d3436;
+            padding: 10px 20px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .left-menu, .right-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-menu li, .right-menu li {
+            list-style-type: none;
+            margin-left: 20px;
+        }
+
+        .left-menu li:first-child {
+            margin-left: 0;
+        }
+
+        .right-menu li {
+            margin-right: 0;
+        }
+
+        nav a, nav li {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover, nav li:hover {
+            background-color: #0984e3;
+            transform: translateY(-3px);
+        }
+
+        /* Content styles */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        button, .submit-btn {
+            background-color: #00cec9;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        button:hover, .submit-btn:hover {
+            background-color: #009688;
+            transform: translateY(-3px);
+        }
+
+        /* Form and Input Styles */
+        form {
+            margin-top: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2d3436;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid #dfe6e9;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 17px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #00cec9;
+            outline: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            background-color: #2d3436;
+            color: white;
+            font-size: 15px;
+            border-radius: 0 0 15px 15px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Подберем фильм, сериал или что-то другое по вашему запросу!</h1>
-        <form action="postform" method="POST">
+
+<header>
+    <nav>
+        <ul class="left-menu">
+            {{if .IsLoggedIn}}
+            <li>Привет, {{.Username}}!</li>
+            <li><a href="/favorites">Избранные фильмы</a></li>
+            {{else}}
+            <li><a href="/login">Войти</a></li>
+            <li><a href="/register">Регистрация</a></li>
+            {{end}}
+        </ul>
+        {{if .IsLoggedIn}}
+        <ul class="right-menu">
+            <li><a href="/logout">Выйти</a></li>
+        </ul>
+        {{end}}
+    </nav>
+</header>
+
+<main class="container">
+    <h1>Добро пожаловать на сайт фильмов</h1>
+    <p>Здесь вы можете искать и добавлять фильмы в избранное!</p>
+
+    <form action="postform" method="POST">
+        <div class="input-group">
             <label for="genre">Жанр:</label>
             <select id="genre" name="genre">
                 <option value="" selected>Любой</option>
@@ -24,7 +181,9 @@
                 <option value="&genres.name=%D1%83%D0%B6%D0%B0%D1%81%D1%8B">Ужасы</option>
                 <option value="&genres.name=%D0%BC%D0%B5%D0%BB%D0%BE%D0%B4%D1%80%D0%B0%D0%BC%D0%B0">Мелодрама</option>
             </select>
-            <br>
+        </div>
+
+        <div class="input-group">
             <label for="typeM">Тип:</label>
             <select id="typeM" name="typeM">
                 <option value="" selected>Любой</option>
@@ -34,22 +193,34 @@
                 <option value="&typeNumber=5">Мультсериал</option>
                 <option value="&typeNumber=3">Мультфильм</option>
             </select>
-            <br>
+        </div>
+
+        <div class="input-group">
             <label for="country">Страна:</label>
             <select id="country" name="country">
                 <option value="" selected>Любая</option>
                 <option value="&countries.name=!%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F">Зарубежные</option>
                 <option value="&countries.name=%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F">Отечественные</option>
             </select>
-            <br>
+        </div>
+
+        <div class="input-group">
             <label for="year">Год релиза:</label>
             <input type="number" id="year" name="year" value="1874" required min="1874" max="2024">
-            <br>
+        </div>
+
+        <div class="input-group">
             <label for="KP">Рейтинг КиноПоиск:</label>
             <input type="number" id="KP" name="KP" step="0.1" value="0" required min="0" max="9">
-            <br>
-            <button type="submit" class="submit-btn">Найти</button>
-        </form>
-    </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Найти</button>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2024 Фильмы. Все права защищены.</p>
+</footer>
+
 </body>
 </html>

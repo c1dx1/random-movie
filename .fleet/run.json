@@ -1,0 +1,15 @@
+{
+    "configurations": [
+
+        {
+            "name": "go build main.go auth.go",
+            "type": "go",
+            "workingDir": "C:\\Users\\nikit\\Desktop\\FleetProject\\KinopoiskAPI",
+            "goExecPath": "C:\\Program Files\\Go\\bin\\go.exe",
+            "buildParams": [
+                "C:/Users/nikit/Desktop/FleetProject/KinopoiskAPI/main.go",
+                "C:/Users/nikit/Desktop/FleetProject/KinopoiskAPI/auth.go"
+            ]
+        }
+    ]
+}

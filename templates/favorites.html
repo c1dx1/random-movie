@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранные фильмы</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+<h1>Избранные фильмы</h1>
+
+<div class="movie-container">
+    {{range .}}
+    <div class="movie">
+        <div>
+            <strong>{{.Name}}</strong> ({{.Year}})<br>
+            Рейтинг: {{.Rating.KP}}
+        </div>
+        <form action="/remove_favorite" method="POST">
+            <input type="hidden" name="movie_id" value="{{.ID}}">
+            <button type="submit">Удалить</button>
+        </form>
+    </div>
+    {{else}}
+    <div class="no-movies">У вас нет избранных фильмов.</div>
+    {{end}}
+</div>
+
+<a href="/" class="back-button">Вернуться на главную</a>
+
+</body>
+</html>
